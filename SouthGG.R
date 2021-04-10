@@ -85,6 +85,8 @@ ggplot(data, mapping=aes(white)) +
 
 
 # Check Assumptions
+non_ts_data <- dplyr::select(data, which(non_ts_cols==1))
+non_ts_data <- non_ts_data[,sapply(non_ts_data, is.numeric)]
 pairs <- ggpairs(non_ts_data[,1:6], title='Pairwise Plots')
 pairs
 
@@ -261,6 +263,7 @@ fig <- fig %>% layout(
 fig
 
 # wild
+library(rjson)
 dat <- fromJSON(file='https://raw.githubusercontent.com/plotly/plotly.js/master/test/image/mocks/gl3d_cone-wind.json')
 
 fig <- plot_ly(
